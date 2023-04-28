@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<h1 class="my-4" style="text-align: center;">추천 영화</h1>
+<section>
+    <div class="row row-cols-1 row-cols-sm-2 g-4 mx-5">
+{% for a in random_recommended_lst %}
+    {% for movie in movies %}
+        {% if movie.pk == a %}
+            <article>
+                <div class="col">
+                    <div class="card h-100">
+                        <a href="{% url 'movies:detail' movie.pk %}">
+                            <img src="{{ movie.poster_path }}" class="card-img-top" alt="img"><br>
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title" style="text-align: center;">{{movie.title}}</h5><hr>
+                            <p class="card-text" style="text-align: center;">{% for genre in movie.genres.all %}
+                            {{genre.name}}
+                            {% endfor %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        {% endif %}
+    {% endfor %}<br><br>
+{% endfor %}
+</section>
+{% endblock %}
+
+
+
+ <div>
+    <h1 class="my-4" style="text-align: center;">Movies</h1>
+    <section>
+    <div class="row row-cols-1 row-cols-sm-3 g-4 mx-5">
+
+        {% for movie in movies %}
+        <article>
+            <div class="col">
+              <div class="card h-100">
+                <a href="{% url 'movies:detail' movie.pk %}">
+                    <img src="{{ movie.poster_path }}" class="card-img-top object-fit: cover;" alt="..." style="">
+                </a>
+                    <div class="card-body">
+                  <h5 class="card-title" style="text-align: center;">{{ movie.title }}</h5>
+                   <p class="card-text">{{ movie.release_date }}</p>
+                 </div>
+              </div>
+            </div>
+      </article>
+        
+        
+        {% endfor %}
+    </div>
+    </section>
+ </div>

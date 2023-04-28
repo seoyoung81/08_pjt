@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+    <h1 class="my-4" style="text-align: center;">Movies</h1>
+    <section>
+    <div class="row row-cols-1 row-cols-sm-3 g-4 mx-5">
+
+        {% for movie in movies %}
+        <article>
+            <div class="col">
+              <div class="card h-100">
+                <a href="{% url 'movies:detail' movie.pk %}">
+                    <img src="{{ movie.poster_path }}" class="card-img-top object-fit: cover;" alt="..." style="">
+                </a>
+                    <div class="card-body">
+                  <h5 class="card-title" style="text-align: center;">{{ movie.title }}</h5>
+                </div>
+              </div>
+            </div>
+      </article>
+        
+        
+        {% endfor %}
+    </div>
+    </section>
+</div>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<h1 style="text-align: center;">{{ movie.title }}</h1>
+<div style="text-align: center;">
+    <img src="{{ movie.poster_path }}"  alt="img"><br><hr>
+</div>
+개봉일: {{ movie.release_date }}<br>
+누적 관객수: {{ movie.popularity }}<br>
+추천수: {{ movie.vote_count }}<br>
+평점: {{ movie.vote_average }}<br><hr>
+{% if movie.overview %}
+    {{ movie.overview }}<br><hr>    
+
+{% endif %}
+장르: {% for genre in movie.genres.all %}
+{{genre.name}}
+{% endfor %}<br>
+
+<br>
+<a href="{% url 'movies:index' %}">[목록보기]</a><br>
+<a href="{% url 'movies:recommended' movie.pk %}">[함께 시청된 콘텐츠]</a>
+
+{% endblock %}
